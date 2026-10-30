@@ -1,5 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 660" shape-rendering="crispEdges">
-  <ellipse cx="212" cy="636" rx="105" ry="12" fill="#080b1b" opacity=".55"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 900" shape-rendering="crispEdges">
+  <ellipse cx="212" cy="878" rx="126" ry="14" fill="#080b1b" opacity=".55"/>
+
+  <!-- Full-body pixel outfit, kept behind the original portrait details. -->
+  <path d="M142 408h136l56 40 34 119-31 22v75H83v-75l-31-22 34-119 56-40Z" fill="#f3c7a6"/>
+  <path d="M88 466h42l-12 73 18 42-15 80H87l-18-80 14-50 5-65Zm244 0h-42l12 73-18 42 15 80h34l18-80-14-50-5-65Z" fill="#f8d6b8"/>
+  <path d="M87 635h35v27l-17 30H69v-34Zm211 0h35l18 23v34h-36l-17-30Z" fill="#e5aa8b"/>
+  <path d="M148 410h124l40 37-15 67-22 25v126H145V539l-22-25-15-67 40-37Z" fill="#fff3df"/>
+  <path d="m148 410 62 47-37 51-47-62 22-36Zm124 0-62 47 37 51 47-62-22-36Z" fill="#ddd7d0"/>
+  <path d="M143 429h34l33 28 33-28h34l27 34-30 58-19-20v92H135v-92l-19 20-30-58 27-34h30Z" fill="#68483d"/>
+  <path d="M177 429h33v28l-24 47-30-43 21-32Zm66 0h-33v28l24 47 30-43-21-32Z" fill="#8a614c"/>
+  <path d="M204 457h14v122h-14Z" fill="#47342f"/>
+  <path d="M172 478h12v12h-12Zm54 86h12v12h-12Z" fill="#ffd166"/>
+  <path d="M137 623h150v38H137Z" fill="#523b36"/>
+
+  <!-- Slim pixel trousers and chunky arcade sneakers. -->
+  <path d="M139 649h68v39h-47v82h-29v-98h8Zm72 0h68v23h8v98h-29v-82h-47Z" fill="#343447"/>
+  <path d="M160 684h43v19h-43v68h-18v-75h18Zm61 0h43v12h18v75h-18v-68h-43Z" fill="#4a5266"/>
+  <path d="M145 750h59v39h-59Zm72 0h59v39h-59Z" fill="#343447"/>
+  <path d="M141 782h67v28h-81v-17l14-11Zm71 0h67l14 11v17h-81Z" fill="#f0d7bd"/>
+  <path d="M127 805h86v24h-99v-15l13-9Zm80 0h86l13 9v15h-99Z" fill="#725044"/>
+  <path d="M112 827h103v24H99v-15l13-9Zm93 0h103l13 9v15H205Z" fill="#f7eee0"/>
+  <path d="M102 850h114v20H88v-10l14-10Zm102 0h114l14 10v10H204Z" fill="#47352f"/>
+  <path d="M87 870h131v12H80v-6l7-6Zm119 0h131l7 6v6H206Z" fill="#11142b"/>
 
   <!-- Long chestnut hair with a center part and chunky pixel highlights. -->
   <path d="M75 270V150h18V96h36V60h54V42h62v18h48v24h36v42h22v112h18v158h-24v72h-42v-42H116v42H74v-72H50V294h25Z" fill="#39241f"/>
@@ -30,24 +52,18 @@
   <path d="M169 219h18v30h-18Zm76 0h18v30h-18Z" fill="#39231f"/>
   <path d="M175 219h6v6h-6Zm76 0h6v6h-6Z" fill="#fff8e9"/>
   <path d="M150 268h12v6h-12Zm102 0h12v6h-12Z" fill="#dc927f"/>
-  <path d="M204 250h12v18h-12Z" fill="#d89a7f"/>
-
-  <!-- Hand raised across the smile, as in the uploaded portrait. -->
-  <path d="M126 294h24v18h30v12h48v18h42v18h30v18h30v24h-18v18h-24v18h-30v-18h-30v-18h-36v-18h-30v-18h-24v-24h-18Z" fill="#e5aa8b"/>
-  <path d="M144 288h18v12h30v12h42v12h42v18h30v18h24v18h-18v12h-24v-18h-30v-18h-42v-12h-36v-18h-24v-18h-12Z" fill="#f6c4a2"/>
-  <path d="M126 306h18v18h24v18h36v18h42v18h30v18h24v12h-24v-12h-36v-18h-42v-18h-36v-18h-24v-18h-12Z" fill="#d99176"/>
-  <path d="M138 302h24v6h-24Zm30 18h30v6h-30Zm42 18h30v6h-30Zm42 18h30v6h-30Z" fill="#ffe0bd"/>
-  <path d="M264 404h30v12h24v18h-24v-12h-30Z" fill="#d88f73"/>
+  <path d="M145 190h42v8h-30v6h-12Zm84 0h42v8h-12v6h-30Z" fill="#684237"/>
+  <path d="M151 190h30v5h-30Zm96 0h30v5h-30Z" fill="#a76b48"/>
+  <path d="M198 250h12v14h-6v8h-12v-8h6Zm12 14h6v8h-6Z" fill="#d89a7f"/>
+  <path d="M199 252h6v10h-6Zm6 14h6v4h-6Z" fill="#f3c7a6"/>
+  <path d="M193 280h6v6h-6Zm6 6h24v6h-24Zm24-6h6v6h-6Z" fill="#75443f"/>
+  <path d="M205 292h12v4h-12Z" fill="#ce7e78"/>
+  <path d="M156 258h12v6h-12Zm-6 6h18v6h-18Zm96-6h12v6h-12Zm-6 6h18v6h-18Z" fill="#eaa393" opacity=".8"/>
 
   <!-- Simple pixel shoulder line and sleeve. -->
   <path d="M50 478h42v-24h36v-18h30v-18h48v24h-30v18h-30v24h-24v68H50Zm320 0h-42v-24h-36v-18h-30v-18h-48v24h30v18h30v24h24v68h72Z" fill="#f3c7a6"/>
   <path d="M84 532h48v-42h30v-24h36v18h-24v24h-24v66H84Zm252 0h-48v-42h-30v-24h-36v18h24v24h24v66h66Z" fill="#76564b"/>
   <path d="M114 550h36v18h-36Zm156 0h36v18h-36Z" fill="#ead6c1"/>
-
-  <!-- Small bracelet pixels on the wrist. -->
-  <path d="M300 390h30v8h-30Zm-8 12h30v8h-30Z" fill="#b53250"/>
-  <path d="M306 390h6v8h-6Zm-6 12h6v8h-6Z" fill="#f4c34e"/>
-  <rect x="320" y="394" width="10" height="10" fill="#ffd166"/>
 
   <!-- Low-resolution sparkle accents. -->
   <path d="M80 194h8v8h-8Zm-8 8h8v8h-8Zm8 8h8v8h-8Zm8-8h8v8h-8Z" fill="#ffd166"/>

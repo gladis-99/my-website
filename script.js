@@ -2,6 +2,13 @@ const hammer = document.querySelector(".cursor-hammer");
 const fxLayer = document.querySelector(".fx-layer");
 const propCards = document.querySelectorAll(".prop-card");
 const languageButtons = document.querySelectorAll(".language-option");
+const heroTitle = document.querySelector("#hero-title");
+const projectLinks = document.querySelectorAll(".project-info a[target='_blank']");
+const copyEmailButton = document.querySelector("#copy-email");
+const copyEmailStatus = document.querySelector("#copy-email-status");
+const characterStage = document.querySelector(".character-stage");
+const characterArt = characterStage?.querySelector(".character-art");
+const eyePupils = document.querySelectorAll(".eye-pupil");
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
@@ -15,12 +22,12 @@ const translations = {
     "menu-caption": '<span class="tiny-blink">▶</span> 选择一个入口',
     resume: "简历",
     "resume-small": "ABOUT / PROFILE",
-    "projects-nav": "我的项目",
-    "projects-small": "PROJECTS / QUESTS",
+    "projects-nav": "试炼成果",
+    "projects-small": "TRIAL RESULTS",
     "personal-nav": "个人项目",
     "personal-small": "PERSONAL / SIDE QUESTS",
     "menu-hint": "<span>↑</span> 点击道具，传送到新场景",
-    "hero-title": '你好，<br>欢迎来到<br><span class="title-highlight">我的游戏世界<span class="title-cursor">_</span></span>',
+    "hero-title": '你好，<br>欢迎来到<br><span class="title-highlight">我的世界<span class="title-cursor">_</span></span>',
     "hero-description": "这里存放着我的故事、正在制作的作品，<br class=\"desktop-break\">还有一些还没被发现的小彩蛋。",
     start: "开始探索",
     ready: '<span class="pixel-heart">♥</span> PLAYER 1 READY <span class="footer-divider">•</span> PRESS START',
@@ -30,7 +37,7 @@ const translations = {
     "scene-01": "SCENE 01",
     "profile-tag": "PLAYER PROFILE",
     "profile-unlocked": "PLAYER DATA // UNLOCKED",
-    "about-title": "关于<span>高峥</span>",
+    "about-title": "人物选择<span>---高峥</span>",
     "about-lead": "马来亚大学传播学硕士在读，关注 AI 生成内容与算法推荐。",
     "profile-label": "PLAYER PROFILE / 001",
     "profile-title": "你好，我是 <span>高峥</span>",
@@ -38,7 +45,7 @@ const translations = {
     "target-role": "求职方向 <b>市场营销 / 产品运营 / 项目管理</b>",
     location: "现居 <b>吉隆坡</b>",
     "experience-label": "CAREER LOG // 2 STAGES",
-    "experience-title": "工作<span>经历</span>",
+    "experience-title": "任务<span>经历</span>",
     "experience-1-date": "2024.09 — 2025.11",
     "experience-1-company": "扬州若曼医疗器械有限公司",
     "experience-1-title": "国际站运营 · 医疗器械外贸",
@@ -64,8 +71,8 @@ const translations = {
     "back-home": "↑ 返回游戏入口",
     "scene-02": "SCENE 02",
     "pixels-tag": "MADE WITH PIXELS",
-    "quest-log": "QUEST LOG // 03 NEW ITEMS",
-    "projects-title": "我的<span>项目成果</span>",
+    "quest-log": "QUEST LOG // 04 NEW ITEMS",
+    "projects-title": "试炼<span>成果</span>",
     "projects-lead": "用客户洞察、数据和 AI，把业务问题推进到实际结果。",
     "quest-1": "医疗器械外贸 / 2024–25",
     "project-1": "国际站增长与转化",
@@ -76,6 +83,10 @@ const translations = {
     "quest-3": "教育 SaaS / 2023–24",
     "project-3": "AI 智慧教学平台落地",
     "project-desc-3": "作为厦门区域负责人，推动平台进入 25 所高校、覆盖数万师生，访谈教师并协同产品团队验证 AI 批改与智能题库需求。",
+    "quest-4": "AI 产品开发 / 2026",
+    "project-4": "小程序自研部署",
+    "project-desc-4": "独立完成微信“饭仔识卡”小程序，独自处理需求梳理、功能开发、服务部署与基础上线，搭建端侧交互、大模型调用与后台管理整套链路，完成版本灰度发布。",
+    "project-tag-4": "AI 产品开发",
     details: "进入副本 <b>↗</b>",
     "scene-03": "SCENE 03",
     "personal-tag": "PERSONAL PROJECTS",
@@ -89,9 +100,11 @@ const translations = {
     "scene-04": "SCENE 04",
     "secret-level": "SECRET LEVEL",
     "new-player": "A NEW PLAYER HAS ENTERED",
-    "contact-title": "期待和你<br><span>一起创造价值</span>",
-    "contact-copy": "对市场营销、产品运营或 AI 项目合作感兴趣，欢迎联系我。",
+    "contact-title": "期待和你<br><span>一起冒险</span>",
+    "contact-copy": "向往市场营销、产品运营或 AI 项目的旅程，随时接受您的召唤。",
     "send-email": "发送邮件",
+    "email-copied": "邮箱已复制",
+    "email-copy-failed": "复制失败，请手动复制邮箱地址。",
     "contact-location": "现居吉隆坡 · 中文 / English",
     "footer-line": "用一点像素，搭建自己的小世界。",
     description: "欢迎来到我的像素游戏世界。这里有我的故事、作品和联系方式。",
@@ -106,12 +119,12 @@ const translations = {
     "menu-caption": '<span class="tiny-blink">▶</span> CHOOSE YOUR PORTAL',
     resume: "Resume",
     "resume-small": "ABOUT / PROFILE",
-    "projects-nav": "My Projects",
-    "projects-small": "PROJECTS / QUESTS",
+    "projects-nav": "Trial Results",
+    "projects-small": "TRIAL RESULTS",
     "personal-nav": "Personal Projects",
     "personal-small": "PERSONAL / SIDE QUESTS",
     "menu-hint": "<span>↑</span> Pick an item to enter a new scene",
-    "hero-title": 'Hey there,<br>welcome to<br><span class="title-highlight">my game world<span class="title-cursor">_</span></span>',
+    "hero-title": 'Hey there,<br>welcome to<br><span class="title-highlight">my world<span class="title-cursor">_</span></span>',
     "hero-description": "This is where I share my story, works in progress,<br class=\"desktop-break\">and a few hidden easter eggs.",
     start: "Start exploring",
     ready: '<span class="pixel-heart">♥</span> PLAYER 1 READY <span class="footer-divider">•</span> PRESS START',
@@ -121,7 +134,7 @@ const translations = {
     "scene-01": "SCENE 01",
     "profile-tag": "PLAYER PROFILE",
     "profile-unlocked": "PLAYER DATA // UNLOCKED",
-    "about-title": "About <span>Gao Zheng</span>",
+    "about-title": "Character Select <span>— Gao Zheng</span>",
     "about-lead": "M.A. candidate in Communication at the University of Malaya, researching AI-generated content and algorithmic recommendation.",
     "profile-label": "PLAYER PROFILE / 001",
     "profile-title": "Hi, I'm <span>Gao Zheng</span>",
@@ -129,7 +142,7 @@ const translations = {
     "target-role": "SEEKING <b>Marketing / Product Ops / Project Management</b>",
     location: "BASED IN <b>Kuala Lumpur</b>",
     "experience-label": "CAREER LOG // 2 STAGES",
-    "experience-title": "Work <span>Experience</span>",
+    "experience-title": "Quest <span>Experience</span>",
     "experience-1-date": "SEP 2024 — NOV 2025",
     "experience-1-company": "YANGZHOU RUOMAN MEDICAL DEVICE CO., LTD.",
     "experience-1-title": "International E-commerce Operations · Medical Devices",
@@ -155,8 +168,8 @@ const translations = {
     "back-home": "↑ Back to game entrance",
     "scene-02": "SCENE 02",
     "pixels-tag": "MADE WITH PIXELS",
-    "quest-log": "QUEST LOG // 03 NEW ITEMS",
-    "projects-title": "Selected <span>Projects</span>",
+    "quest-log": "QUEST LOG // 04 NEW ITEMS",
+    "projects-title": "Trial <span>Results</span>",
     "projects-lead": "Turning customer insight, data, and AI into measurable business outcomes.",
     "quest-1": "MEDICAL DEVICE EXPORT / 2024–25",
     "project-1": "Marketplace Growth & Conversion",
@@ -167,6 +180,10 @@ const translations = {
     "quest-3": "EDUCATION SAAS / 2023–24",
     "project-3": "AI Teaching Platform Rollout",
     "project-desc-3": "Led regional rollout across 25 universities, reaching tens of thousands of students and faculty. Interviewed instructors and partnered with product teams to validate AI grading and question-bank needs.",
+    "quest-4": "AI PRODUCT DEVELOPMENT / 2026",
+    "project-4": "Self-developed Mini Program",
+    "project-desc-4": "Independently delivered the WeChat mini program “饭仔识卡,” covering requirements, feature development, service deployment, and initial launch. Built the end-to-end flow for client-side interactions, LLM integration, and admin management, then completed a phased rollout.",
+    "project-tag-4": "AI Product Development",
     details: "Enter the level <b>↗</b>",
     "scene-03": "SCENE 03",
     "personal-tag": "PERSONAL PROJECTS",
@@ -180,9 +197,11 @@ const translations = {
     "scene-04": "SCENE 04",
     "secret-level": "SECRET LEVEL",
     "new-player": "A NEW PLAYER HAS ENTERED",
-    "contact-title": "Let's build<br><span>something valuable</span>",
-    "contact-copy": "Open to conversations about marketing, product operations, and AI project collaboration.",
+    "contact-title": "I can't wait to<br><span>adventure with you</span>",
+    "contact-copy": "Journeying toward marketing, product operations, or AI projects—always ready to answer your call.",
     "send-email": "Email me",
+    "email-copied": "Email copied",
+    "email-copy-failed": "Could not copy. Please copy the email address manually.",
     "contact-location": "Based in Kuala Lumpur · 中文 / English",
     "footer-line": "A little pixel magic for my own corner of the world.",
     description: "Welcome to my pixel game world. Find my story, projects, and contact details here.",
@@ -206,6 +225,7 @@ function setLanguage(language) {
     const value = dictionary[element.dataset.i18nAria];
     if (value !== undefined) element.setAttribute("aria-label", value);
   });
+  renderPixelTitle();
   languageButtons.forEach((button) => {
     const isActive = button.dataset.language === language;
     button.classList.toggle("is-active", isActive);
@@ -218,8 +238,136 @@ function setLanguage(language) {
   }
 }
 
+function renderPixelTitle() {
+  if (!heroTitle) return;
+
+  let canvas = heroTitle.querySelector(".pixel-title-canvas");
+  if (!canvas) {
+    canvas = document.createElement("canvas");
+    canvas.className = "pixel-title-canvas";
+    canvas.setAttribute("aria-hidden", "true");
+    heroTitle.append(canvas);
+  }
+
+  const bounds = heroTitle.getBoundingClientRect();
+  if (!bounds.width || !bounds.height) return;
+
+  const padding = 24;
+  const dpr = window.devicePixelRatio || 1;
+  const pixelSize = 2 / dpr;
+  const scale = 1 / pixelSize;
+  const pixelWidth = Math.ceil((bounds.width + padding * 2) * scale);
+  const pixelHeight = Math.ceil((bounds.height + padding * 2) * scale);
+  const pixelCanvas = document.createElement("canvas");
+  pixelCanvas.width = pixelWidth;
+  pixelCanvas.height = pixelHeight;
+  const context = pixelCanvas.getContext("2d");
+  if (!context) return;
+  context.scale(scale, scale);
+  context.translate(padding, padding);
+
+  const glyphs = [];
+  const walker = document.createTreeWalker(heroTitle, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      return node.parentElement?.closest(".title-cursor")
+        ? NodeFilter.FILTER_REJECT
+        : NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const segmenter = typeof Intl.Segmenter === "function"
+    ? new Intl.Segmenter(document.documentElement.lang, { granularity: "grapheme" })
+    : null;
+
+  while (walker.nextNode()) {
+    const textNode = walker.currentNode;
+    const style = getComputedStyle(textNode.parentElement);
+    const segments = segmenter
+      ? [...segmenter.segment(textNode.textContent)]
+      : Array.from(textNode.textContent, (segment, index, characters) => ({
+          segment,
+          index: characters.slice(0, index).join("").length
+        }));
+
+    for (const { segment, index } of segments) {
+      if (!segment.trim()) continue;
+      const range = document.createRange();
+      range.setStart(textNode, index);
+      range.setEnd(textNode, index + segment.length);
+      const rect = range.getBoundingClientRect();
+      if (!rect.width || !rect.height) continue;
+
+      const fontSize = Number.parseFloat(style.fontSize);
+      glyphs.push({
+        text: segment,
+        x: rect.left - bounds.left,
+        y: rect.bottom - bounds.top - fontSize * 0.14,
+        font: style.font,
+        color: textNode.parentElement?.closest(".title-highlight") ? "#ffd45e" : "#fff5dc",
+        glow: textNode.parentElement?.closest(".title-highlight")
+          ? "rgb(255 184 65 / 90%)"
+          : "rgb(65 205 255 / 90%)"
+      });
+    }
+  }
+
+  for (const glyph of glyphs) {
+    context.font = glyph.font;
+    context.fillStyle = "#090b1c";
+    context.shadowColor = "transparent";
+    context.fillText(glyph.text, glyph.x + 4, glyph.y + 4);
+    context.fillText(glyph.text, glyph.x + 2, glyph.y + 2);
+  }
+  for (const glyph of glyphs) {
+    context.font = glyph.font;
+    context.fillStyle = glyph.color;
+    context.shadowColor = glyph.glow;
+    context.shadowBlur = 1;
+    context.fillText(glyph.text, glyph.x, glyph.y);
+  }
+  context.shadowBlur = 0;
+
+  canvas.width = Math.ceil((bounds.width + padding * 2) * dpr);
+  canvas.height = Math.ceil((bounds.height + padding * 2) * dpr);
+  canvas.style.width = `${bounds.width + padding * 2}px`;
+  canvas.style.height = `${bounds.height + padding * 2}px`;
+  canvas.style.left = `${-padding}px`;
+  canvas.style.top = `${-padding}px`;
+  const displayContext = canvas.getContext("2d");
+  if (!displayContext) return;
+  displayContext.imageSmoothingEnabled = false;
+  displayContext.drawImage(pixelCanvas, 0, 0, canvas.width, canvas.height);
+}
+
+if (heroTitle) {
+  const schedulePixelTitle = () => window.requestAnimationFrame(renderPixelTitle);
+  window.addEventListener("resize", schedulePixelTitle);
+  if (document.fonts?.ready) document.fonts.ready.then(schedulePixelTitle);
+}
+
 for (const button of languageButtons) {
   button.addEventListener("click", () => setLanguage(button.dataset.language));
+}
+
+if (copyEmailButton && copyEmailStatus) {
+  copyEmailButton.addEventListener("click", async () => {
+    const language = document.documentElement.lang === "en" ? "en" : "zh";
+    try {
+      await navigator.clipboard.writeText("99gladis99@gmail.com");
+      copyEmailStatus.textContent = translations[language]["email-copied"];
+    } catch (error) {
+      copyEmailStatus.textContent = translations[language]["email-copy-failed"];
+      console.error("Could not copy email address to clipboard.", error);
+    }
+  });
+}
+
+for (const link of projectLinks) {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const projectWindow = window.open(link.href, "_blank");
+    if (projectWindow) projectWindow.opener = null;
+    else window.location.assign(link.href);
+  });
 }
 
 let preferredLanguage = "zh";
@@ -232,25 +380,58 @@ try {
 setLanguage(preferredLanguage);
 
 if (hasFinePointer && hammer) {
+  let hammerStolen = false;
+
   document.addEventListener("pointermove", (event) => {
     hammer.style.left = `${event.clientX}px`;
     hammer.style.top = `${event.clientY}px`;
     hammer.classList.add("is-visible");
-    for (const pupil of document.querySelectorAll(".eye-pupil")) {
+
+    for (const pupil of eyePupils) {
       const bounds = pupil.getBoundingClientRect();
-      const x = Math.max(-1, Math.min(1, (event.clientX - (bounds.left + bounds.width / 2)) / 65)) * 4.5;
-      const y = Math.max(-1, Math.min(1, (event.clientY - (bounds.top + bounds.height / 2)) / 45)) * 4;
+      const x = Math.max(-1, Math.min(1, (event.clientX - (bounds.left + bounds.width / 2)) / 90)) * 1.6;
+      const y = Math.max(-1, Math.min(1, (event.clientY - (bounds.top + bounds.height / 2)) / 70)) * 1.2;
       pupil.style.setProperty("--gaze-x", `${x}px`);
       pupil.style.setProperty("--gaze-y", `${y}px`);
+    }
+
+    if (!characterArt || !characterStage) return;
+    const bounds = characterArt.getBoundingClientRect();
+    const nearestX = Math.max(bounds.left, Math.min(event.clientX, bounds.right));
+    const nearestY = Math.max(bounds.top, Math.min(event.clientY, bounds.bottom));
+    const distance = Math.hypot(event.clientX - nearestX, event.clientY - nearestY);
+    const shouldStealHammer = distance < 92;
+
+    if (!shouldStealHammer) {
+      if (hammerStolen) {
+        characterStage.classList.remove("is-stealing");
+        hammer.classList.remove("is-stolen");
+        hammerStolen = false;
+      }
+      return;
+    }
+
+    const targetX = bounds.left + bounds.width * 0.9;
+    const targetY = bounds.top + bounds.height * 0.4;
+    hammer.style.setProperty("--steal-x", `${targetX - event.clientX}px`);
+    hammer.style.setProperty("--steal-y", `${targetY - event.clientY}px`);
+    if (!hammerStolen) {
+      characterStage.classList.add("is-stealing");
+      hammer.classList.add("is-stolen");
+      hammerStolen = true;
+      makeSparks(targetX, targetY);
     }
   });
 
   document.addEventListener("pointerleave", () => {
     hammer.classList.remove("is-visible");
-    document.querySelectorAll(".eye-pupil").forEach((pupil) => {
+    eyePupils.forEach((pupil) => {
       pupil.style.setProperty("--gaze-x", "0px");
       pupil.style.setProperty("--gaze-y", "0px");
     });
+    characterStage?.classList.remove("is-stealing");
+    hammer.classList.remove("is-stolen");
+    hammerStolen = false;
   });
   document.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "touch") return;
